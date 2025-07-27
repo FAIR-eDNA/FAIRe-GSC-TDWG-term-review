@@ -32,7 +32,8 @@ for (i in packages) {
 **STEP 3.** Source the `FAIRetree.R` script to load the function into your R environment.
 
 ```
-source("https://raw.githubusercontent.com/FAIR-eDNA/FAIRe_tree/refs/heads/main/FAIRetree.R")
+source("https://raw.githubusercontent.com/FAIR-eDNA/FAIRe_term_review_decision_tree/main/FAIRetree.R")
+
 ```
 
 About the functions: 
