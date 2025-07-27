@@ -312,7 +312,8 @@ tree_fun <- function(term, map_to, plot_save = F, plot_save_path = getwd()){
   
   for (i in ls) {
     original <- get(i)
-    safe_text_tab[safe_text_tab$name==i, 'original_text'] <- original
+    if (!is.null(original[[1]])) {
+      safe_text_tab[safe_text_tab$name==i, 'original_text'] <- original
     #safe_text <- gsub("['\"{}<>:;]", "__", original)
     safe_text <- gsub("['\"{}<>]", "__", original)
     
@@ -325,6 +326,7 @@ tree_fun <- function(term, map_to, plot_save = F, plot_save_path = getwd()){
     
     safe_text_tab[safe_text_tab$name==i, 'safe_wrapped_text'] <- wrapped  
     assign(i, wrapped)
+    }
   }
   
   
@@ -789,7 +791,8 @@ half_tree_fun <- function(term, map_to, plot_save = F, plot_save_path=getwd()){
   
   for (i in ls) {
     original <- get(i)
-    safe_text_tab[safe_text_tab$name==i, 'original_text'] <- original
+    if (!is.null(original[[1]])) {
+      safe_text_tab[safe_text_tab$name==i, 'original_text'] <- original
     #safe_text <- gsub("['\"{}<>:;]", "__", original)
     safe_text <- gsub("['\"{}<>]", "__", original)
     
@@ -802,6 +805,8 @@ half_tree_fun <- function(term, map_to, plot_save = F, plot_save_path=getwd()){
     
     safe_text_tab[safe_text_tab$name==i, 'safe_wrapped_text'] <- wrapped  
     assign(i, wrapped)
+    }
+    
   }
   
   # Note about glue(): Double braces {{ ... }} must be used to mean literal { ... } within glue().
