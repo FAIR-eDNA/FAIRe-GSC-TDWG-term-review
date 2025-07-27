@@ -145,154 +145,156 @@ tree_fun <- function(term, map_to, plot_save = F, plot_save_path = getwd()){
     q1_y <- red_arrow
     q1_n <- black_arrow
     
-    # Modified
+    ## Modification
     cols <- c("Q6_name_mod_0_1", "Q6_description_mod_0_1", "Q6_example_mod_0_1", "Q6_type_mod_0_1")
-    if (sum(temp[cols], na.rm=T) > 0) { # Q2 = Yes, modified from {map_to}
+    if (sum(temp[cols], na.rm=T) > 0) {# Q2 = Yes, modified from {map_to}
       q2_y <- red_arrow
       q2_n <- black_arrow
-      
-      # Modified to align with other standard
-      if (identical(temp[["Q3_align_other_std_0_1"]], 1)) { # q3 = Yes
-        q3_y <- red_arrow
-        q3_n <- black_arrow
-        if (!is.na(temp$Q4_other_std_id)) q4_entry <- temp$Q4_other_std_id
-        
-        if (identical(temp[["Q5_mapped_0_1"]], 1)) {
-          q5_y <- red_arrow
-          q5_n <- black_arrow
-        } else if (identical(temp[["Q5_mapped_0_1"]], 0)){
-          q5_y <- black_arrow
-          q5_n <- red_arrow
-          
-        }
-      } else if (identical(temp[["Q3_align_other_std_0_1"]], 0)) { # Q3 = No
-        q3_y <- black_arrow
-        q3_n <- red_arrow
-        # Q6 what was modified?
-        if (!is.na(temp[["Q6_name_mod_0_1"]])) {
-          if (temp[["Q6_name_mod_0_1"]] == 1) {
-            q6_term_name <- red_arrow
-            if (!is.na(temp$A1a_name_mod_reason)) a1a_entry <- temp$A1a_name_mod_reason
-            if (!is.na(temp[["Q7a_name_mod_critical_0_1"]])){
-              if (temp[["Q7a_name_mod_critical_0_1"]] == 1) {
-                q7a_y <- red_arrow
-                q7a_n <- black_arrow
-              } else if (temp[["Q7a_name_mod_critical_0_1"]] == 0) {
-                q7a_y <- black_arrow
-                q7a_n <- red_arrow
-              }
-            }
-          } else if (temp[["Q6_name_mod_0_1"]] == 0) {
-            q6_term_name <- black_arrow
-          }
-        }
-        if (!is.na(temp[["Q6_description_mod_0_1"]])) {
-          if (temp[["Q6_description_mod_0_1"]] == 1) {
-            q6_definition <- red_arrow
-            if (!is.na(temp$A1b_description_mod_reason)) a1b_entry <- temp$A1b_description_mod_reason
-            if (!is.na(temp[["Q7b_description_mod_critical_0_1"]])){
-              if (temp[["Q7b_description_mod_critical_0_1"]] == 1) {
-                q7b_y <- red_arrow
-                q7b_n <- black_arrow
-              } else if (temp[["Q7b_description_mod_critical_0_1"]] == 0) {
-                q7b_y <- black_arrow
-                q7b_n <- red_arrow
-              }
-            }
-          } else if (temp[["Q6_description_mod_0_1"]] == 0) {
-            q6_definition <- black_arrow
-          }
-        }
-        
-        if (!is.na(temp[["Q6_example_mod_0_1"]])) {
-          if (temp[["Q6_example_mod_0_1"]] == 1) {
-            q6_example <- red_arrow
-            if (!is.na(temp$A1c_example_mod_reason)) a1c_entry <- temp$A1c_example_mod_reason
-            if (!is.na(temp[["Q7c_example_mod_critical_0_1"]])){
-              if (temp[["Q7c_example_mod_critical_0_1"]] == 1) {
-                q7c_y <- red_arrow
-                q7c_n <- black_arrow
-              } else if (temp[["Q7c_example_mod_critical_0_1"]] == 0) {
-                q7c_y <- black_arrow
-                q7c_n <- red_arrow
-              }
-            }
-          } else if (temp[["Q6_example_mod_0_1"]] == 0) {
-            q6_example <- black_arrow
-          }
-        }
-        
-        if (!is.na(temp[["Q6_type_mod_0_1"]])) {
-          if (temp[["Q6_type_mod_0_1"]] == 1) {
-            q6_term_type <- red_arrow
-            if (!is.na(temp$A1d_type_mod_reason) & !is.null(temp$A1d_type_mod_reason[[1]])) a1d_entry <- temp$A1d_type_mod_reason
-            
-            
-            if (!is.na(temp[["Q7d_type_mod_critical_0_1"]])){
-              if (temp[["Q7d_type_mod_critical_0_1"]] == 1) {
-                q7d_y <- red_arrow
-                q7d_n <- black_arrow
-                if (temp[['term_type']]== "controlled vocabulary") {
-                  q8_y <- red_arrow
-                  q8_n <- black_arrow
-                  if (!is.na(temp[["Q9_vocab_ls_source_0_1"]])) {
-                    if (temp[["Q9_vocab_ls_source_0_1"]] == 1) {
-                      q9_y <- red_arrow
-                      q9_n <- black_arrow
-                      if (!is.na(temp$Q9_1_which_source)) q9_1_entry <- temp[["Q9_1_which_source"]]
-                      if (!is.na(temp[["Q10_vocab_ls_source_mod_0_1"]])) {
-                        if (temp[["Q10_vocab_ls_source_mod_0_1"]] == 1) {
-                          q10_y <- red_arrow
-                          q10_n <- black_arrow
-                        } else if (temp[["Q10_vocab_ls_source_mod_0_1"]] == 0) {
-                          q10_y <- black_arrow
-                          q10_n <- red_arrow
-                        }
-                      }
-                    } else if (temp[["Q9_vocab_ls_source_0_1"]] == 0) {
-                      q9_y <- black_arrow
-                      q9_n <- red_arrow
-                    }
-                  }
-                } else {
-                  q8_y <- black_arrow
-                  q8_n <- red_arrow
-                }
-                
-              } else if (temp[["Q7d_type_mod_critical_0_1"]] == 0) {
-                q7d_y <- black_arrow
-                q7d_n <- red_arrow
-              }
-            }
-          } else if (temp[["Q6_type_mod_0_1"]] == 0) {
-            q6_term_type <- black_arrow
-          }
-        }
-        
-        q6_term_name <- if (identical(temp[["Q6_name_mod_0_1"]], 1)) red_arrow else if (identical(temp[["Q6_name_mod_0_1"]], 0)) black_arrow
-        q6_definition <- if (identical(temp[["Q6_description_mod_0_1"]], 1)) red_arrow else if (identical(temp[["Q6_description_mod_0_1"]], 0)) black_arrow
-        if (!is.na(temp[["Q6_example_mod_0_1"]])) {
-          q6_example <- if (identical(temp[["Q6_example_mod_0_1"]], 1)) red_arrow else if (identical(temp[["Q6_example_mod_0_1"]], 0)) black_arrow
-        }
-        if (!is.na(temp[["Q6_type_mod_0_1"]])) {
-          q6_term_type <- if (identical(temp[["Q6_type_mod_0_1"]], 1)) red_arrow else if (identical(temp[["Q6_type_mod_0_1"]], 0)) black_arrow
-          
-        }
-        
+    } else if (all(!is.na(temp[cols]))) {
+      if (all(temp[cols]) == 0) { # Q2 = No, not modified
+        q2_y <- black_arrow
+        q2_n <- red_arrow
       } 
-      
-      
-    } else if (all(temp[cols]) == 0) { # Q2 = No, not modified
-      q2_y <- black_arrow
-      q2_n <- red_arrow
     }
-    
-    
-    
-    
-    #
-    
-    
+    if (identical(temp[["Q3_align_other_std_0_1"]], 1)) {
+      q2_y <- red_arrow
+      q2_n <- black_arrow
+      q3_y <- red_arrow
+      q3_n <- black_arrow
+      if (!is.na(temp$Q4_other_std_id)) q4_entry <- temp$Q4_other_std_id
+      
+      if (identical(temp[["Q5_mapped_0_1"]], 1)) {
+        q5_y <- red_arrow
+        q5_n <- black_arrow
+      } else if (identical(temp[["Q5_mapped_0_1"]], 0)){
+        q5_y <- black_arrow
+        q5_n <- red_arrow
+        
+      }
+    } else if (identical(temp[["Q3_align_other_std_0_1"]], 0)) { # Q3 = No
+      q3_y <- black_arrow
+      q3_n <- red_arrow
+      # Q6 what was modified?
+      if (!is.na(temp[["Q6_name_mod_0_1"]])) {
+        if (temp[["Q6_name_mod_0_1"]] == 1) {
+          q6_term_name <- red_arrow
+          if (!is.na(temp$A1a_name_mod_reason)) a1a_entry <- temp$A1a_name_mod_reason
+          if (!is.na(temp[["Q7a_name_mod_critical_0_1"]])){
+            if (temp[["Q7a_name_mod_critical_0_1"]] == 1) {
+              q7a_y <- red_arrow
+              q7a_n <- black_arrow
+            } else if (temp[["Q7a_name_mod_critical_0_1"]] == 0) {
+              q7a_y <- black_arrow
+              q7a_n <- red_arrow
+            }
+          }
+        } else if (temp[["Q6_name_mod_0_1"]] == 0) {
+          q6_term_name <- black_arrow
+        }
+      }
+      if (!is.na(temp[["Q6_description_mod_0_1"]])) {
+        if (temp[["Q6_description_mod_0_1"]] == 1) {
+          q6_definition <- red_arrow
+          if (!is.na(temp$A1b_description_mod_reason)) a1b_entry <- temp$A1b_description_mod_reason
+          if (!is.na(temp[["Q7b_description_mod_critical_0_1"]])){
+            if (temp[["Q7b_description_mod_critical_0_1"]] == 1) {
+              q7b_y <- red_arrow
+              q7b_n <- black_arrow
+            } else if (temp[["Q7b_description_mod_critical_0_1"]] == 0) {
+              q7b_y <- black_arrow
+              q7b_n <- red_arrow
+            }
+          }
+        } else if (temp[["Q6_description_mod_0_1"]] == 0) {
+          q6_definition <- black_arrow
+        }
+      }
+      
+      if (!is.na(temp[["Q6_example_mod_0_1"]])) {
+        if (temp[["Q6_example_mod_0_1"]] == 1) {
+          q6_example <- red_arrow
+          if (!is.na(temp$A1c_example_mod_reason)) a1c_entry <- temp$A1c_example_mod_reason
+          if (!is.na(temp[["Q7c_example_mod_critical_0_1"]])){
+            if (temp[["Q7c_example_mod_critical_0_1"]] == 1) {
+              q7c_y <- red_arrow
+              q7c_n <- black_arrow
+            } else if (temp[["Q7c_example_mod_critical_0_1"]] == 0) {
+              q7c_y <- black_arrow
+              q7c_n <- red_arrow
+            }
+          }
+        } else if (temp[["Q6_example_mod_0_1"]] == 0) {
+          q6_example <- black_arrow
+        }
+      }
+      
+      if (!is.na(temp[["Q6_type_mod_0_1"]])) {
+        if (temp[["Q6_type_mod_0_1"]] == 1) {
+          q6_term_type <- red_arrow
+          if (!is.na(temp$A1d_type_mod_reason) & !is.null(temp$A1d_type_mod_reason[[1]])) a1d_entry <- temp$A1d_type_mod_reason
+          
+          
+          if (!is.na(temp[["Q7d_type_mod_critical_0_1"]])){
+            if (temp[["Q7d_type_mod_critical_0_1"]] == 1) {
+              q7d_y <- red_arrow
+              q7d_n <- black_arrow
+              if (temp[['term_type']]== "controlled vocabulary") {
+                q8_y <- red_arrow
+                q8_n <- black_arrow
+                if (!is.na(temp[["Q9_vocab_ls_source_0_1"]])) {
+                  if (temp[["Q9_vocab_ls_source_0_1"]] == 1) {
+                    q9_y <- red_arrow
+                    q9_n <- black_arrow
+                    if (!is.na(temp$Q9_1_which_source)) q9_1_entry <- temp[["Q9_1_which_source"]]
+                    if (!is.na(temp[["Q10_vocab_ls_source_mod_0_1"]])) {
+                      if (temp[["Q10_vocab_ls_source_mod_0_1"]] == 1) {
+                        q10_y <- red_arrow
+                        q10_n <- black_arrow
+                      } else if (temp[["Q10_vocab_ls_source_mod_0_1"]] == 0) {
+                        q10_y <- black_arrow
+                        q10_n <- red_arrow
+                      }
+                    }
+                  } else if (temp[["Q9_vocab_ls_source_0_1"]] == 0) {
+                    q9_y <- black_arrow
+                    q9_n <- red_arrow
+                  }
+                }
+              } else {
+                q8_y <- black_arrow
+                q8_n <- red_arrow
+              }
+              
+            } else if (temp[["Q7d_type_mod_critical_0_1"]] == 0) {
+              q7d_y <- black_arrow
+              q7d_n <- red_arrow
+            }
+          }
+        } else if (temp[["Q6_type_mod_0_1"]] == 0) {
+          q6_term_type <- black_arrow
+        }
+      }
+      
+      q6_term_name <- if (identical(temp[["Q6_name_mod_0_1"]], 1)) red_arrow else if (identical(temp[["Q6_name_mod_0_1"]], 0)) black_arrow
+      q6_definition <- if (identical(temp[["Q6_description_mod_0_1"]], 1)) red_arrow else if (identical(temp[["Q6_description_mod_0_1"]], 0)) black_arrow
+      if (!is.na(temp[["Q6_example_mod_0_1"]])) {
+        q6_example <- if (identical(temp[["Q6_example_mod_0_1"]], 1)) red_arrow else if (identical(temp[["Q6_example_mod_0_1"]], 0)) black_arrow
+      }
+      if (!is.na(temp[["Q6_type_mod_0_1"]])) {
+        q6_term_type <- if (identical(temp[["Q6_type_mod_0_1"]], 1)) red_arrow else if (identical(temp[["Q6_type_mod_0_1"]], 0)) black_arrow
+        
+      }
+      
+    } 
+    if (all(!is.na(temp[cols]))) {
+      if (all(temp[cols]) == 0) { # Q2 = No, not modified
+        q2_y <- black_arrow
+        q2_n <- red_arrow
+      }
+      
+      
+    }
+        
     
     
   }
@@ -624,156 +626,155 @@ half_tree_fun <- function(term, map_to, plot_save = F, plot_save_path=getwd()){
     q1_y <- red_arrow
     q1_n <- black_arrow
     
-    # Modified
+    ## Modification
     cols <- c("Q6_name_mod_0_1", "Q6_description_mod_0_1", "Q6_example_mod_0_1", "Q6_type_mod_0_1")
-    if (sum(temp[cols], na.rm=T) > 0) { # Q2 = Yes, modified from {map_to}
+    if (sum(temp[cols], na.rm=T) > 0) {# Q2 = Yes, modified from {map_to}
       q2_y <- red_arrow
       q2_n <- black_arrow
+    } else if (all(!is.na(temp[cols]))) {
+      if (all(temp[cols]) == 0) { # Q2 = No, not modified
+        q2_y <- black_arrow
+        q2_n <- red_arrow
+      }
       
-      # Modified to align with other standard
-      if (identical(temp[["Q3_align_other_std_0_1"]], 1)) { # q3 = Yes
-        q3_y <- red_arrow
-        q3_n <- black_arrow
-        if (!is.na(temp$Q4_other_std_id)) q4_entry <- temp$Q4_other_std_id
-        
-        if (identical(temp[["Q5_mapped_0_1"]], 1)) {
-          q5_y <- red_arrow
-          q5_n <- black_arrow
-        } else if (identical(temp[["Q5_mapped_0_1"]], 0)){
-          q5_y <- black_arrow
-          q5_n <- red_arrow
-          
-        }
-      } else if (identical(temp[["Q3_align_other_std_0_1"]], 0)) { # Q3 = No
-        q3_y <- black_arrow
-        q3_n <- red_arrow
-        # Q6 what was modified?
-        if (!is.na(temp[["Q6_name_mod_0_1"]])) {
-          if (temp[["Q6_name_mod_0_1"]] == 1) {
-            q6_term_name <- red_arrow
-            if (!is.na(temp$A1a_name_mod_reason)) a1a_entry <- temp$A1a_name_mod_reason
-            if (!is.na(temp[["Q7a_name_mod_critical_0_1"]])){
-              if (temp[["Q7a_name_mod_critical_0_1"]] == 1) {
-                q7a_y <- red_arrow
-                q7a_n <- black_arrow
-              } else if (temp[["Q7a_name_mod_critical_0_1"]] == 0) {
-                q7a_y <- black_arrow
-                q7a_n <- red_arrow
-              }
-            }
-          } else if (temp[["Q6_name_mod_0_1"]] == 0) {
-            q6_term_name <- black_arrow
-          }
-        }
-        if (!is.na(temp[["Q6_description_mod_0_1"]])) {
-          if (temp[["Q6_description_mod_0_1"]] == 1) {
-            q6_definition <- red_arrow
-            if (!is.na(temp$A1b_description_mod_reason)) a1b_entry <- temp$A1b_description_mod_reason
-            if (!is.na(temp[["Q7b_description_mod_critical_0_1"]])){
-              if (temp[["Q7b_description_mod_critical_0_1"]] == 1) {
-                q7b_y <- red_arrow
-                q7b_n <- black_arrow
-              } else if (temp[["Q7b_description_mod_critical_0_1"]] == 0) {
-                q7b_y <- black_arrow
-                q7b_n <- red_arrow
-              }
-            }
-          } else if (temp[["Q6_description_mod_0_1"]] == 0) {
-            q6_definition <- black_arrow
-          }
-        }
-        
-        if (!is.na(temp[["Q6_example_mod_0_1"]])) {
-          if (temp[["Q6_example_mod_0_1"]] == 1) {
-            q6_example <- red_arrow
-            if (!is.na(temp$A1c_example_mod_reason)) a1c_entry <- temp$A1c_example_mod_reason
-            if (!is.na(temp[["Q7c_example_mod_critical_0_1"]])){
-              if (temp[["Q7c_example_mod_critical_0_1"]] == 1) {
-                q7c_y <- red_arrow
-                q7c_n <- black_arrow
-              } else if (temp[["Q7c_example_mod_critical_0_1"]] == 0) {
-                q7c_y <- black_arrow
-                q7c_n <- red_arrow
-              }
-            }
-          } else if (temp[["Q6_example_mod_0_1"]] == 0) {
-            q6_example <- black_arrow
-          }
-        }
-        
-        if (!is.na(temp[["Q6_type_mod_0_1"]])) {
-          if (temp[["Q6_type_mod_0_1"]] == 1) {
-            q6_term_type <- red_arrow
-            if (!is.na(temp$A1d_type_mod_reason) & !is.null(temp$A1d_type_mod_reason[[1]])) a1d_entry <- temp$A1d_type_mod_reason
-            
-            
-            if (!is.na(temp[["Q7d_type_mod_critical_0_1"]])){
-              if (temp[["Q7d_type_mod_critical_0_1"]] == 1) {
-                q7d_y <- red_arrow
-                q7d_n <- black_arrow
-                if (temp[['term_type']]== "controlled vocabulary") {
-                  q8_y <- red_arrow
-                  q8_n <- black_arrow
-                  if (!is.na(temp[["Q9_vocab_ls_source_0_1"]])) {
-                    if (temp[["Q9_vocab_ls_source_0_1"]] == 1) {
-                      q9_y <- red_arrow
-                      q9_n <- black_arrow
-                      if (!is.na(temp$Q9_1_which_source)) q9_1_entry <- temp[["Q9_1_which_source"]]
-                      if (!is.na(temp[["Q10_vocab_ls_source_mod_0_1"]])) {
-                        if (temp[["Q10_vocab_ls_source_mod_0_1"]] == 1) {
-                          q10_y <- red_arrow
-                          q10_n <- black_arrow
-                        } else if (temp[["Q10_vocab_ls_source_mod_0_1"]] == 0) {
-                          q10_y <- black_arrow
-                          q10_n <- red_arrow
-                        }
-                      }
-                    } else if (temp[["Q9_vocab_ls_source_0_1"]] == 0) {
-                      q9_y <- black_arrow
-                      q9_n <- red_arrow
-                    }
-                  }
-                } else {
-                  q8_y <- black_arrow
-                  q8_n <- red_arrow
-                }
-                
-              } else if (temp[["Q7d_type_mod_critical_0_1"]] == 0) {
-                q7d_y <- black_arrow
-                q7d_n <- red_arrow
-              }
-            }
-          } else if (temp[["Q6_type_mod_0_1"]] == 0) {
-            q6_term_type <- black_arrow
-          }
-        }
-        
-        q6_term_name <- if (identical(temp[["Q6_name_mod_0_1"]], 1)) red_arrow else if (identical(temp[["Q6_name_mod_0_1"]], 0)) black_arrow
-        q6_definition <- if (identical(temp[["Q6_description_mod_0_1"]], 1)) red_arrow else if (identical(temp[["Q6_description_mod_0_1"]], 0)) black_arrow
-        if (!is.na(temp[["Q6_example_mod_0_1"]])) {
-          q6_example <- if (identical(temp[["Q6_example_mod_0_1"]], 1)) red_arrow else if (identical(temp[["Q6_example_mod_0_1"]], 0)) black_arrow
-        }
-        if (!is.na(temp[["Q6_type_mod_0_1"]])) {
-          q6_term_type <- if (identical(temp[["Q6_type_mod_0_1"]], 1)) red_arrow else if (identical(temp[["Q6_type_mod_0_1"]], 0)) black_arrow
-          
-        }
-        
-      } 
-      
-      
-    } else if (all(temp[cols]) == 0) { # Q2 = No, not modified
-      q2_y <- black_arrow
-      q2_n <- red_arrow
     }
+
     
     
-    
-    
-    #
-    
-    
-    
-    
+    if (identical(temp[["Q3_align_other_std_0_1"]], 1)) {
+      q2_y <- red_arrow
+      q2_n <- black_arrow
+      q3_y <- red_arrow
+      q3_n <- black_arrow
+      if (!is.na(temp$Q4_other_std_id)) q4_entry <- temp$Q4_other_std_id
+      
+      if (identical(temp[["Q5_mapped_0_1"]], 1)) {
+        q5_y <- red_arrow
+        q5_n <- black_arrow
+      } else if (identical(temp[["Q5_mapped_0_1"]], 0)){
+        q5_y <- black_arrow
+        q5_n <- red_arrow
+        
+      }
+    } else if (identical(temp[["Q3_align_other_std_0_1"]], 0)) { # Q3 = No
+      q3_y <- black_arrow
+      q3_n <- red_arrow
+      # Q6 what was modified?
+      if (!is.na(temp[["Q6_name_mod_0_1"]])) {
+        if (temp[["Q6_name_mod_0_1"]] == 1) {
+          q6_term_name <- red_arrow
+          if (!is.na(temp$A1a_name_mod_reason)) a1a_entry <- temp$A1a_name_mod_reason
+          if (!is.na(temp[["Q7a_name_mod_critical_0_1"]])){
+            if (temp[["Q7a_name_mod_critical_0_1"]] == 1) {
+              q7a_y <- red_arrow
+              q7a_n <- black_arrow
+            } else if (temp[["Q7a_name_mod_critical_0_1"]] == 0) {
+              q7a_y <- black_arrow
+              q7a_n <- red_arrow
+            }
+          }
+        } else if (temp[["Q6_name_mod_0_1"]] == 0) {
+          q6_term_name <- black_arrow
+        }
+      }
+      if (!is.na(temp[["Q6_description_mod_0_1"]])) {
+        if (temp[["Q6_description_mod_0_1"]] == 1) {
+          q6_definition <- red_arrow
+          if (!is.na(temp$A1b_description_mod_reason)) a1b_entry <- temp$A1b_description_mod_reason
+          if (!is.na(temp[["Q7b_description_mod_critical_0_1"]])){
+            if (temp[["Q7b_description_mod_critical_0_1"]] == 1) {
+              q7b_y <- red_arrow
+              q7b_n <- black_arrow
+            } else if (temp[["Q7b_description_mod_critical_0_1"]] == 0) {
+              q7b_y <- black_arrow
+              q7b_n <- red_arrow
+            }
+          }
+        } else if (temp[["Q6_description_mod_0_1"]] == 0) {
+          q6_definition <- black_arrow
+        }
+      }
+      
+      if (!is.na(temp[["Q6_example_mod_0_1"]])) {
+        if (temp[["Q6_example_mod_0_1"]] == 1) {
+          q6_example <- red_arrow
+          if (!is.na(temp$A1c_example_mod_reason)) a1c_entry <- temp$A1c_example_mod_reason
+          if (!is.na(temp[["Q7c_example_mod_critical_0_1"]])){
+            if (temp[["Q7c_example_mod_critical_0_1"]] == 1) {
+              q7c_y <- red_arrow
+              q7c_n <- black_arrow
+            } else if (temp[["Q7c_example_mod_critical_0_1"]] == 0) {
+              q7c_y <- black_arrow
+              q7c_n <- red_arrow
+            }
+          }
+        } else if (temp[["Q6_example_mod_0_1"]] == 0) {
+          q6_example <- black_arrow
+        }
+      }
+      
+      if (!is.na(temp[["Q6_type_mod_0_1"]])) {
+        if (temp[["Q6_type_mod_0_1"]] == 1) {
+          q6_term_type <- red_arrow
+          if (!is.na(temp$A1d_type_mod_reason) & !is.null(temp$A1d_type_mod_reason[[1]])) a1d_entry <- temp$A1d_type_mod_reason
+          
+          
+          if (!is.na(temp[["Q7d_type_mod_critical_0_1"]])){
+            if (temp[["Q7d_type_mod_critical_0_1"]] == 1) {
+              q7d_y <- red_arrow
+              q7d_n <- black_arrow
+              if (temp[['term_type']]== "controlled vocabulary") {
+                q8_y <- red_arrow
+                q8_n <- black_arrow
+                if (!is.na(temp[["Q9_vocab_ls_source_0_1"]])) {
+                  if (temp[["Q9_vocab_ls_source_0_1"]] == 1) {
+                    q9_y <- red_arrow
+                    q9_n <- black_arrow
+                    if (!is.na(temp$Q9_1_which_source)) q9_1_entry <- temp[["Q9_1_which_source"]]
+                    if (!is.na(temp[["Q10_vocab_ls_source_mod_0_1"]])) {
+                      if (temp[["Q10_vocab_ls_source_mod_0_1"]] == 1) {
+                        q10_y <- red_arrow
+                        q10_n <- black_arrow
+                      } else if (temp[["Q10_vocab_ls_source_mod_0_1"]] == 0) {
+                        q10_y <- black_arrow
+                        q10_n <- red_arrow
+                      }
+                    }
+                  } else if (temp[["Q9_vocab_ls_source_0_1"]] == 0) {
+                    q9_y <- black_arrow
+                    q9_n <- red_arrow
+                  }
+                }
+              } else {
+                q8_y <- black_arrow
+                q8_n <- red_arrow
+              }
+              
+            } else if (temp[["Q7d_type_mod_critical_0_1"]] == 0) {
+              q7d_y <- black_arrow
+              q7d_n <- red_arrow
+            }
+          }
+        } else if (temp[["Q6_type_mod_0_1"]] == 0) {
+          q6_term_type <- black_arrow
+        }
+      }
+      
+      q6_term_name <- if (identical(temp[["Q6_name_mod_0_1"]], 1)) red_arrow else if (identical(temp[["Q6_name_mod_0_1"]], 0)) black_arrow
+      q6_definition <- if (identical(temp[["Q6_description_mod_0_1"]], 1)) red_arrow else if (identical(temp[["Q6_description_mod_0_1"]], 0)) black_arrow
+      if (!is.na(temp[["Q6_example_mod_0_1"]])) {
+        q6_example <- if (identical(temp[["Q6_example_mod_0_1"]], 1)) red_arrow else if (identical(temp[["Q6_example_mod_0_1"]], 0)) black_arrow
+      }
+      if (!is.na(temp[["Q6_type_mod_0_1"]])) {
+        q6_term_type <- if (identical(temp[["Q6_type_mod_0_1"]], 1)) red_arrow else if (identical(temp[["Q6_type_mod_0_1"]], 0)) black_arrow 
+      }
+    } 
+    if (all(!is.na(temp[cols]))) {
+      if (all(temp[cols]) == 0) { # Q2 = No, not modified
+        q2_y <- black_arrow
+        q2_n <- red_arrow
+      } 
+    }
   }
   
   if (map_to == 'MIxS') {
