@@ -9,13 +9,9 @@ To support this effort, a term-by-term review of the FAIRe checklist is being co
 - Determine whether each term should be included in the proposed DwC/MIxS eDNA checklist.
 To help visualise the decision-making process, an R function was developed to generate decision trees that capture and display the review outcomes for each term.
 
-
-
 Follow the below steps to run generate a decision tree for a FAIRe term using R functions (tree_fun or half_tree_fun).
 
-**STEP 1.** Set your working directory in R. 
-
-**STEP 2.** Install packages. 
+**STEP 1.** Install packages. 
 
 ```
 packages <- c("readxl", "openxlsx", "RColorBrewer", "dplyr", "here", 
@@ -29,11 +25,17 @@ for (i in packages) {
 }
 ```
 
-**STEP 3.** Source the `FAIRetree.R` script to load the function into your R environment.
+**STEP 2.** Source the `FAIRetree.R` script to load the function into your R environment.
 
 ```
 source("https://raw.githubusercontent.com/FAIR-eDNA/FAIRe_term_review_decision_tree/main/FAIRetree.R")
 
+```
+
+**STEP 3.** Run the function. For example:
+```
+tree_fun(term = 'project_name', map_to = 'DwC')
+half_tree_fun(term = 'project_name', map_to = 'MIxS', plot_save = T, plot_save_path = 'ROutput')
 ```
 
 About the functions: 
@@ -52,12 +54,6 @@ Both `tree_fun` and `half_tree_fun` requires the following parameters:
 The two optional parameters are:
 - `plot_save` T or F to save the tree plot. Default is F.
 - `plot_save_path` A path where a tree plot is saved. Do not include / at the end. Default is a current working directly. 
-
-**STEP 4.** Run the function. For example:
-```
-tree_fun(term = 'project_name', map_to = 'DwC')
-half_tree_fun(term = 'project_name', map_to = 'MIxS', plot_save = T, plot_save_path = 'ROutput')
-```
 
 Expected output:
 A decision tree will be generated and displayed in the Viewer pane in RStudio.
