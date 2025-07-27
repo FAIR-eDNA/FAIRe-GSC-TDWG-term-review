@@ -151,7 +151,7 @@ tree_fun <- function(term, map_to, plot_save = F, plot_save_path = getwd()){
       q2_y <- red_arrow
       q2_n <- black_arrow
     } else if (all(!is.na(temp[cols]))) {
-      if (all(temp[cols]) == 0) { # Q2 = No, not modified
+      if (sum(temp[cols]) == 0) { # Q2 = No, not modified
         q2_y <- black_arrow
         q2_n <- red_arrow
       } 
@@ -287,7 +287,7 @@ tree_fun <- function(term, map_to, plot_save = F, plot_save_path = getwd()){
       
     } 
     if (all(!is.na(temp[cols]))) {
-      if (all(temp[cols]) == 0) { # Q2 = No, not modified
+      if (sum(temp[cols]) == 0) { # Q2 = No, not modified
         q2_y <- black_arrow
         q2_n <- red_arrow
       }
@@ -632,7 +632,7 @@ half_tree_fun <- function(term, map_to, plot_save = F, plot_save_path=getwd()){
       q2_y <- red_arrow
       q2_n <- black_arrow
     } else if (all(!is.na(temp[cols]))) {
-      if (all(temp[cols]) == 0) { # Q2 = No, not modified
+      if (sum(temp[cols]) == 0) { # Q2 = No, not modified
         q2_y <- black_arrow
         q2_n <- red_arrow
       }
@@ -770,7 +770,7 @@ half_tree_fun <- function(term, map_to, plot_save = F, plot_save_path=getwd()){
       }
     } 
     if (all(!is.na(temp[cols]))) {
-      if (all(temp[cols]) == 0) { # Q2 = No, not modified
+      if (sum(temp[cols]) == 0) { # Q2 = No, not modified
         q2_y <- black_arrow
         q2_n <- red_arrow
       } 
