@@ -508,16 +508,24 @@ tree_fun <- function(term, map_to, plot_save = F, plot_save_path = getwd()){
   print(graph)
   if (plot_save == TRUE) {
     if (dir.exists(paste0(plot_save_path, '/tree_plot')) == F) dir.create(paste0(plot_save_path,'/tree_plot'))
-    
     ## Save tree
     svg <- export_svg(graph) # Convert to SVG string
     svg_raw <- charToRaw(svg) # Convert SVG string to raw vector
     img <- rsvg::rsvg(svg_raw) # Render and save as JPG
     image <- magick::image_read(img)
-    image_write(image, path = paste0(plot_save_path, '/tree_plot/', term, '_map_to_', map_to, '.jpg'), format = "jpg")
-    
+    jpg_name <- paste0(term, '_map_to_', map_to, '.jpg')
+    if (temp$tree_completed_0_1 == 0 | is.na(temp$tree_completed_0_1)) {
+      image_write(image, path = paste0(plot_save_path, '/tree_plot/', jpg_name), format = "jpg")
+    } else if (temp$tree_completed_0_1 == 1) {
+      # Remove the plots from tree_plot and half_tree_plot folders, and save them in a discussion_completed folder.  
+      if (file.exists(paste0(plot_save_path, '/tree_plot/', jpg_name))) file.remove(paste0(plot_save_path, '/tree_plot/', jpg_name))
+      if (file.exists(paste0(plot_save_path, '/half_tree_plot/', jpg_name))) file.remove(paste0(plot_save_path, '/half_tree_plot/', jpg_name))
+      if (dir.exists(paste0(plot_save_path, '/discussion_completed'))==F) dir.create(paste0(plot_save_path, '/discussion_completed'))
+      if (dir.exists(paste0(plot_save_path, '/discussion_completed/tree_plot'))==F) dir.create(paste0(plot_save_path, '/discussion_completed/tree_plot'))
+      if (dir.exists(paste0(plot_save_path, '/discussion_completed/half_tree_plot'))==F) dir.create(paste0(plot_save_path, '/discussion_completed/half_tree_plot'))
+      image_write(image, path = paste0(plot_save_path, '/discussion_completed/tree_plot/', jpg_name), format = "jpg")
+    }
   }
-  
 }
 ##### Half tree function ####
 half_tree_fun <- function(term, map_to, plot_save = F, plot_save_path=getwd()){
@@ -1034,16 +1042,25 @@ half_tree_fun <- function(term, map_to, plot_save = F, plot_save_path=getwd()){
   print(paste0('faire:',term))
   graph <- grViz(as.character(tree_code))
   print(graph)
-  
-  if (plot_save == T) {
-    if (dir.exists(paste0(plot_save_path, '/half_tree_plot')) == F) dir.create(paste0(plot_save_path, '/half_tree_plot')) 
+  if (plot_save == TRUE) {
+    if (dir.exists(paste0(plot_save_path, '/half_tree_plot')) == F) dir.create(paste0(plot_save_path,'/half_tree_plot'))
     ## Save tree
     svg <- export_svg(graph) # Convert to SVG string
     svg_raw <- charToRaw(svg) # Convert SVG string to raw vector
     img <- rsvg::rsvg(svg_raw) # Render and save as JPG
     image <- magick::image_read(img)
-    image_write(image, path = paste0(plot_save_path, '/half_tree_plot/', term, '_map_to_', map_to, '.jpg'), format = "jpg")
-    
+    jpg_name <- paste0(term, '_map_to_', map_to, '.jpg')
+    if (temp$tree_completed_0_1 == 0 | is.na(temp$tree_completed_0_1)) {
+      image_write(image, path = paste0(plot_save_path, '/tree_plot/', jpg_name), format = "jpg")
+    } else if (temp$tree_completed_0_1 == 1) {
+      # Remove the plots from tree_plot and half_tree_plot folders, and save them in a discussion_completed folder.  
+      if (file.exists(paste0(plot_save_path, '/tree_plot/', jpg_name))) file.remove(paste0(plot_save_path, '/tree_plot/', jpg_name))
+      if (file.exists(paste0(plot_save_path, '/half_tree_plot/', jpg_name))) file.remove(paste0(plot_save_path, '/half_tree_plot/', jpg_name))
+      if (dir.exists(paste0(plot_save_path, '/discussion_completed'))==F) dir.create(paste0(plot_save_path, '/discussion_completed'))
+      if (dir.exists(paste0(plot_save_path, '/discussion_completed/tree_plot'))==F) dir.create(paste0(plot_save_path, '/discussion_completed/tree_plot'))
+      if (dir.exists(paste0(plot_save_path, '/discussion_completed/half_tree_plot'))==F) dir.create(paste0(plot_save_path, '/discussion_completed/half_tree_plot'))
+      image_write(image, path = paste0(plot_save_path, '/discussion_completed/half_tree_plot/', jpg_name), format = "jpg")
+    }
   }
-  
 }
+
