@@ -45,7 +45,8 @@ tree_fun <- function(term, map_to, plot_save = F, plot_save_path = getwd()){
   gs4_deauth() # Deauthorize so it doesn't prompt for login (works only for public sheets)
   sheet_url <- "https://docs.google.com/spreadsheets/d/1WxiiFNDMOjaucp5WXk-fKSXC3dH2e7jzsAiPnSR8pdU/edit?usp=sharing" # link to the google sheet "FAIRe_checklist_v1.0_decision_tree"
   mapping_df <- as.data.frame(read_sheet(sheet_url, sheet = map_to)) 
-  temp <- mapping_df[which(mapping_df$term_name == term),]
+  row_num <- which(mapping_df$term_name == term)
+  temp <- mapping_df[row_num,]
   
   # FAIRe term info
   faire_req_lev <- temp$requirement_level
@@ -513,7 +514,7 @@ tree_fun <- function(term, map_to, plot_save = F, plot_save_path = getwd()){
     svg_raw <- charToRaw(svg) # Convert SVG string to raw vector
     img <- rsvg::rsvg(svg_raw) # Render and save as JPG
     image <- magick::image_read(img)
-    jpg_name <- paste0(term, '_map_to_', map_to, '.jpg')
+    jpg_name <- paste0(sprintf("%03d", row_num), '_', term, '_map_to_', map_to, '.jpg')
     if (temp$tree_completed_0_1 == 0 | is.na(temp$tree_completed_0_1)) {
       image_write(image, path = paste0(plot_save_path, '/tree_plot/', jpg_name), format = "jpg")
     } else if (temp$tree_completed_0_1 == 1) {
@@ -532,9 +533,8 @@ half_tree_fun <- function(term, map_to, plot_save = F, plot_save_path=getwd()){
   gs4_deauth() # Deauthorize so it doesn't prompt for login (works only for public sheets)
   sheet_url <- "https://docs.google.com/spreadsheets/d/1WxiiFNDMOjaucp5WXk-fKSXC3dH2e7jzsAiPnSR8pdU/edit?usp=sharing" # link to the google sheet "FAIRe_checklist_v1.0_decision_tree"
   mapping_df <- as.data.frame(read_sheet(sheet_url, sheet = map_to)) 
-  #mapping_df <- read_excel('data_std/TDWG_GSC_TG/mapping/FAIRe_checklist_v1.0_decision_tree_downloaded20250723.xlsx', sheet = map_to)
-  
-  temp <- mapping_df[which(mapping_df$term_name == term),]
+  row_num <- which(mapping_df$term_name == term)
+  temp <- mapping_df[row_num,]
   
   # FAIRe term info
   faire_req_lev <- temp$requirement_level
@@ -1049,9 +1049,9 @@ half_tree_fun <- function(term, map_to, plot_save = F, plot_save_path=getwd()){
     svg_raw <- charToRaw(svg) # Convert SVG string to raw vector
     img <- rsvg::rsvg(svg_raw) # Render and save as JPG
     image <- magick::image_read(img)
-    jpg_name <- paste0(term, '_map_to_', map_to, '.jpg')
+    jpg_name <- paste0(sprintf("%03d", row_num), '_', term, '_map_to_', map_to, '.jpg')
     if (temp$tree_completed_0_1 == 0 | is.na(temp$tree_completed_0_1)) {
-      image_write(image, path = paste0(plot_save_path, '/tree_plot/', jpg_name), format = "jpg")
+      image_write(image, path = paste0(plot_save_path, '/half_tree_plot/', jpg_name), format = "jpg")
     } else if (temp$tree_completed_0_1 == 1) {
       # Remove the plots from tree_plot and half_tree_plot folders, and save them in a discussion_completed folder.  
       if (file.exists(paste0(plot_save_path, '/tree_plot/', jpg_name))) file.remove(paste0(plot_save_path, '/tree_plot/', jpg_name))
@@ -1063,4 +1063,5 @@ half_tree_fun <- function(term, map_to, plot_save = F, plot_save_path=getwd()){
     }
   }
 }
+
 
