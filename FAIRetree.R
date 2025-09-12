@@ -841,16 +841,16 @@ half_tree_fun <- function(term, map_to, plot_save = F, plot_save_path=getwd()){
   }}
 
   #Legend box (top left)
-  
-  subgraph cluster_legend {{
-  label = 'Legend'
-  style = dashed
-  legend1 [label = 'Defined by eDNA TG\\n(Red text)', fontcolor='red']
-  legend2 [label = 'To discuss with TDWG/GSC community\\n(Numbered D1, D2, ...)', fillcolor = '#AFEEEE', style = 'filled']
-  legend3 [label = 'Action item for eDNA TG\\n(Numbered A1, A2, ...)', fillcolor='#FFF59D', style = 'filled']
-  legend4 [label = 'Question\\n(Numbered Q1, Q2, ...)', fillcolor = '#D3D3D3', style = 'filled']
-  legend5 [label = 'Porposal from eDNA TG\\n(Include/Exclude/Propose)\\n(Numbered P1, P2, ...)']
-  }}
+
+  #subgraph cluster_legend {{
+  #label = 'Legend'
+  #style = dashed
+  #legend1 [label = 'Defined by eDNA TG\\n(Red text)', fontcolor='red']
+  #legend2 [label = 'To discuss with TDWG/GSC community\\n(Numbered D1, D2, ...)', fillcolor = '#AFEEEE', style = 'filled']
+  #legend3 [label = 'Action item for eDNA TG\\n(Numbered A1, A2, ...)', fillcolor='#FFF59D', style = 'filled']
+  #legend4 [label = 'Question\\n(Numbered Q1, Q2, ...)', fillcolor = '#D3D3D3', style = 'filled']
+  #legend5 [label = 'Porposal from eDNA TG\\n(Include/Exclude/Propose)\\n(Numbered P1, P2, ...)']
+  #}}
 
   # Define nodes
   faireterm [label = 'FAIRe term: {term}\\nMapping to: {map_to}\\nObject ID: {object_id}\\nObject label: {object_label}']
@@ -1063,5 +1063,6 @@ half_tree_fun <- function(term, map_to, plot_save = F, plot_save_path=getwd()){
     }
   }
 }
+
 
 
