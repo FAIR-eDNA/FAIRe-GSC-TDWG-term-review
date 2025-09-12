@@ -10,7 +10,7 @@ To support this effort, a term-by-term review of the FAIRe checklist is being co
 To help visualise the decision-making process, an R function was developed to generate decision trees that capture and display the review outcomes for each term.
 
 # General procedure for each FAIRe term
-1. Miwa to complete the decision tree as much as possible (by filling Column AA- AY of the Google Sheet [FAIRe_checklist_v.1.0.2_decision_tree](https://docs.google.com/spreadsheets/d/1WxiiFNDMOjaucp5WXk-fKSXC3dH2e7jzsAiPnSR8pdU/edit?usp=sharing))
+1. Complete the decision tree as much as possible (by filling Column AA- AY of the Google Sheet [FAIRe_checklist_v.1.0.2_decision_tree](https://docs.google.com/spreadsheets/d/1WxiiFNDMOjaucp5WXk-fKSXC3dH2e7jzsAiPnSR8pdU/edit?usp=sharing))
 2. Generate decision trees using the [tree R functions](https://github.com/FAIR-eDNA/FAIRe_term_review_decision_tree/blob/main/FAIRetree.R) 
 3. Discuss with the eDNA TG and GSC/TDWG members
 4. Make decisions
