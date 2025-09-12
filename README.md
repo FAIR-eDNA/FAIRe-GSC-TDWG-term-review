@@ -1,4 +1,4 @@
-# FAIRe_term_review_decision_tree
+# FAIRe term review for MIxS/DwC eDNA checklist proposal
 This repository contains scripts and documentation for the TDWG/GSC eDNA task group to conduct a term-by-term review of the FAIRe checklist. 
 
 # Background
@@ -9,6 +9,17 @@ To support this effort, a term-by-term review of the FAIRe checklist is being co
 - Determine whether each term should be included in the proposed DwC/MIxS eDNA checklist.
 To help visualise the decision-making process, an R function was developed to generate decision trees that capture and display the review outcomes for each term.
 
+# General procedure for each FAIRe term
+1. Miwa to complete the decision tree as much as possible (by filling Column AA- AY of the Google Sheet [FAIRe_checklist_v.1.0.2_decision_tree](https://docs.google.com/spreadsheets/d/1WxiiFNDMOjaucp5WXk-fKSXC3dH2e7jzsAiPnSR8pdU/edit?usp=sharing))
+2. Generate decision trees using the [tree R functions](https://github.com/FAIR-eDNA/FAIRe_term_review_decision_tree/blob/main/FAIRetree.R) 
+3. Discuss with the eDNA TG and GSC/TDWG members
+4. Make decisions
+5. Review SKOS mapping
+6. Enter 1 in the Column X "tree_completed" [FAIRe_checklist_v.1.0.2_decision_tree](https://docs.google.com/spreadsheets/d/1WxiiFNDMOjaucp5WXk-fKSXC3dH2e7jzsAiPnSR8pdU/edit?usp=sharing)
+
+
+
+# About the [tree R functions](https://github.com/FAIR-eDNA/FAIRe_term_review_decision_tree/blob/main/FAIRetree.R) 
 Follow the below steps to run generate a decision tree for a FAIRe term using R functions (tree_fun or half_tree_fun).
 
 **STEP 1.** Install packages. 
