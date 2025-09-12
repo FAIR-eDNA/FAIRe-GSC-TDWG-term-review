@@ -410,7 +410,7 @@ tree_fun <- function(term, map_to, plot_save = F, plot_save_path = getwd()){
   A1c_whyMod_example [label= 'A1-c.Describe the reason\\nfor the modification.\\n{a1c_entry}', fillcolor = '#FFF59D', style = 'filled']
   A1d_whyMod_type [label= 'A1-d.Describe the reason\\nfor the modification.\\n{a1d_entry}', fillcolor = '#FFF59D', style = 'filled']
   A2_establishMap [label = 'A2.Establish mapping', fillcolor = '#FFF59D', style = 'filled']
-  A3 [label = 'A3.Describe the reason why the term was needed in\\nFAIRe but not in the draft DwC/MIxS eDNA checklist.\\n{a3_entry}', fillcolor = '#FFF59D', style = 'filled']
+  A3 [label = 'A3.Describe the reason why the term was needed in\\nFAIRe but not in the draft {map_to} eDNA checklist.\\n{a3_entry}', fillcolor = '#FFF59D', style = 'filled']
   
   D1 [label = 'D1.Discuss the need for the modification, and decide whether it should\\nbe applied only to the draft {map_to} eDNA checklist or more widely.', fillcolor = '#AFEEEE', style = 'filled']
   D2 [label = 'D2.Discuss the need for the modification, and decide whether it should\\nbe applied only to the draft {map_to} eDNA checklist or more widely.', fillcolor = '#AFEEEE', style = 'filled']
@@ -997,7 +997,7 @@ half_tree_fun <- function(term, map_to, plot_save = F, plot_save_path=getwd()){
   P8 [label = 'P8.PROPOSE the FAIRe {term} term (as-is, as a controlled vocabulary)\\nin the draft {map_to} eDNA checklist']
   P9 [label = 'P9.PROPOSE the FAIRe {term} term (as-is, as a controlled\\nvocabulary) in the {map_to} eDNA checklist.']
   
-  A3 [label = 'A3.Describe the reason why the term was needed in\\nFAIRe but not in the draft DwC/MIxS eDNA checklist.\\n{a3_entry}', fillcolor = '#FFF59D', style = 'filled']
+  A3 [label = 'A3.Describe the reason why the term was needed in\\nFAIRe but not in the draft {map_to} eDNA checklist.\\n{a3_entry}', fillcolor = '#FFF59D', style = 'filled']
   
   D6 [label = 'D6.Confirm inclusion of the proposed term in the {map_to} eDNA checklist.', fillcolor = '#AFEEEE', style = 'filled']
   D7 [label = 'D7.Discuss the need to propose the new controlled\\nvocabulary list with ontology term servers (i.e. Ontobee).', fillcolor = '#AFEEEE', style = 'filled']
@@ -1063,6 +1063,7 @@ half_tree_fun <- function(term, map_to, plot_save = F, plot_save_path=getwd()){
     }
   }
 }
+
 
 
 
