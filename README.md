@@ -13,9 +13,10 @@ To help visualise the decision-making process, an R function was developed to ge
 1. Complete the decision tree as much as possible (by filling Column AA- AY of the Google Sheet [FAIRe_checklist_v.1.0.2_decision_tree](https://docs.google.com/spreadsheets/d/1WxiiFNDMOjaucp5WXk-fKSXC3dH2e7jzsAiPnSR8pdU/edit?usp=sharing))
 2. Generate decision trees using the [tree R functions](https://github.com/FAIR-eDNA/FAIRe_term_review_decision_tree/blob/main/FAIRetree.R) 
 3. Discuss with the eDNA TG and GSC/TDWG members
-4. Make decisions
-5. Review SKOS mapping (Re-visit points raised in [Issue #14](https://github.com/FAIR-eDNA/FAIRe_checklist/issues/14))
-6. Enter 1 in the Column X "tree_completed" [FAIRe_checklist_v.1.0.2_decision_tree](https://docs.google.com/spreadsheets/d/1WxiiFNDMOjaucp5WXk-fKSXC3dH2e7jzsAiPnSR8pdU/edit?usp=sharing)
+4. If further disucssions are required, raise issues under this repository
+5. Make decisions
+6. Review SKOS mapping (Re-visit points raised in [Issue #14](https://github.com/FAIR-eDNA/FAIRe_checklist/issues/14))
+7. Enter 1 in the Column X "tree_completed" [FAIRe_checklist_v.1.0.2_decision_tree](https://docs.google.com/spreadsheets/d/1WxiiFNDMOjaucp5WXk-fKSXC3dH2e7jzsAiPnSR8pdU/edit?usp=sharing)
 
 
 
