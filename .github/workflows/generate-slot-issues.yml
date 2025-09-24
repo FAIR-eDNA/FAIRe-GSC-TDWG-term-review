@@ -28,8 +28,7 @@ jobs:
           python-version: '3.9'
       
       - name: Install dependencies
-        run: |
-          pip install PyYAML requests
+        run: pip install PyYAML requests
       
       - name: Generate slot review issues
         env:
@@ -38,128 +37,102 @@ jobs:
           DRY_RUN: ${{ github.event.inputs.dry_run }}
           BATCH_SIZE: ${{ github.event.inputs.batch_size }}
         run: |
-          python - << 'PYTHON_EOF'
+          python -c "
           import os
           import yaml
           import requests
-          import json
-
-          def get_slots_from_github():
-              """Fetch slot files from the FAIRe_checklist repository."""
-              api_url = "https://api.github.com/repos/FAIR-eDNA/FAIRe_checklist/contents/slots"
+          
+          def get_slots():
+              api_url = 'https://api.github.com/repos/FAIR-eDNA/FAIRe_checklist/contents/slots'
               response = requests.get(api_url)
               response.raise_for_status()
               return response.json()
-
-          def get_file_content(download_url):
-              """Get the content of a YAML file."""
-              response = requests.get(download_url)
+          
+          def get_content(url):
+              response = requests.get(url)
               response.raise_for_status()
               return yaml.safe_load(response.text)
-
+          
           def create_issue(slot_name, slot_file, description):
-              """Create a GitHub issue."""
               repo = os.environ['GITHUB_REPOSITORY']
               token = os.environ['GITHUB_TOKEN']
               dry_run = os.environ.get('DRY_RUN', 'false').lower() == 'true'
               
               if dry_run:
-                  print(f"DRY RUN: Would create issue for '{slot_name}'")
-                  print(f"  Title: Review: {slot_name}")
-                  print(f"  File: https://github.com/FAIR-eDNA/FAIRe_checklist/blob/main/slots/{slot_file}")
-                  print(f"  Description: {description[:100]}...")
-                  print("---")
+                  print(f'DRY RUN: Would create issue for {slot_name}')
+                  print(f'  File: https://github.com/FAIR-eDNA/FAIRe_checklist/blob/main/slots/{slot_file}')
                   return -1
               
-              # Check if issue already exists
-              search_url = f"https://api.github.com/repos/{repo}/issues"
               headers = {'Authorization': f'token {token}'}
               
-              # Search for existing issue
+              # Check existing issues
+              search_url = f'https://api.github.com/repos/{repo}/issues'
               params = {'state': 'all', 'per_page': 100}
               response = requests.get(search_url, headers=headers, params=params)
               response.raise_for_status()
               
-              existing_issues = response.json()
-              for issue in existing_issues:
-                  if f"Review: {slot_name}" in issue['title']:
-                      print(f"Issue already exists for {slot_name}: #{issue['number']}")
+              for issue in response.json():
+                  if f'Review: {slot_name}' in issue['title']:
+                      print(f'Issue already exists for {slot_name}: #{issue[\"number\"]}')
                       return issue['number']
               
               # Create new issue
-              issue_body = f"""# Review: {slot_name}
-*Note that in the modeling standard we are using, [LinkML](https://linkml.io/), 'terms' are referred to as 'slots'.*
-## Slot Information
-- **File**: `https://github.com/FAIR-eDNA/FAIRe_checklist/blob/main/slots/{slot_file}`
-## Description
-{description}"""
+              issue_body = f'''# Review: {slot_name}
+          *Note that in the modeling standard we are using, [LinkML](https://linkml.io/), 'terms' are referred to as 'slots'.*
+          ## Slot Information
+          - **File**: \`https://github.com/FAIR-eDNA/FAIRe_checklist/blob/main/slots/{slot_file}\`
+          ## Description
+          {description}'''
               
               issue_data = {
-                  'title': f"Review: {slot_name}",
+                  'title': f'Review: {slot_name}',
                   'body': issue_body
               }
               
-              response = requests.post(
-                  f"https://api.github.com/repos/{repo}/issues",
-                  headers=headers,
-                  json=issue_data
-              )
+              response = requests.post(f'https://api.github.com/repos/{repo}/issues', headers=headers, json=issue_data)
               response.raise_for_status()
               
               issue = response.json()
-              print(f"Created issue #{issue['number']} for {slot_name}")
+              print(f'Created issue #{issue[\"number\"]} for {slot_name}')
               return issue['number']
-
-          def main():
-              batch_size = int(os.environ.get('BATCH_SIZE', '50'))
-              dry_run = os.environ.get('DRY_RUN', 'false').lower() == 'true'
-              
-              print(f"Mode: {'DRY RUN' if dry_run else 'LIVE'}")
-              print(f"Batch size: {batch_size}")
-              print("---")
-              
-              # Get slot files
-              print("Fetching slot files from FAIRe_checklist repository...")
-              files = get_slots_from_github()
-              yaml_files = [f for f in files if f['name'].endswith(('.yaml', '.yml'))]
-              
-              print(f"Found {len(yaml_files)} YAML files")
-              
-              created_count = 0
-              for file_info in yaml_files[:batch_size]:
-                  if created_count >= batch_size:
-                      break
-                      
-                  file_name = file_info['name']
-                  print(f"Processing {file_name}...")
+          
+          # Main execution
+          batch_size = int(os.environ.get('BATCH_SIZE', '50'))
+          dry_run = os.environ.get('DRY_RUN', 'false').lower() == 'true'
+          
+          print(f'Mode: {\"DRY RUN\" if dry_run else \"LIVE\"}')
+          print(f'Batch size: {batch_size}')
+          
+          files = get_slots()
+          yaml_files = [f for f in files if f['name'].endswith(('.yaml', '.yml'))]
+          print(f'Found {len(yaml_files)} YAML files')
+          
+          created_count = 0
+          for file_info in yaml_files[:batch_size]:
+              if created_count >= batch_size:
+                  break
                   
-                  try:
-                      # Get file content
-                      content = get_file_content(file_info['download_url'])
-                      
-                      # Extract slots
-                      if 'slots' in content:
-                          slots = content['slots']
-                      else:
-                          # Assume entire file is a single slot definition
-                          slot_name = file_name.replace('.yaml', '').replace('.yml', '')
-                          slots = {slot_name: content}
-                      
-                      # Create issues for each slot
-                      for slot_name, slot_def in slots.items():
-                          if created_count >= batch_size:
-                              break
-                              
-                          if isinstance(slot_def, dict):
-                              description = slot_def.get('description', 'No description provided')
-                              create_issue(slot_name, file_name, description)
-                              created_count += 1
-                          
-                  except Exception as e:
-                      print(f"Error processing {file_name}: {e}")
+              file_name = file_info['name']
+              print(f'Processing {file_name}...')
               
-              print(f"{'Would process' if dry_run else 'Processed'} {created_count} slots")
-
-          if __name__ == '__main__':
-              main()
-          PYTHON_EOF
+              try:
+                  content = get_content(file_info['download_url'])
+                  
+                  if 'slots' in content:
+                      slots = content['slots']
+                  else:
+                      slot_name = file_name.replace('.yaml', '').replace('.yml', '')
+                      slots = {slot_name: content}
+                  
+                  for slot_name, slot_def in slots.items():
+                      if created_count >= batch_size:
+                          break
+                      if isinstance(slot_def, dict):
+                          description = slot_def.get('description', 'No description provided')
+                          create_issue(slot_name, file_name, description)
+                          created_count += 1
+              except Exception as e:
+                  print(f'Error processing {file_name}: {e}')
+          
+          print(f'{\"Would process\" if dry_run else \"Processed\"} {created_count} slots')
+          "
