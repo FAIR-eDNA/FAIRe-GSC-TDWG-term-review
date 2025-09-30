@@ -576,7 +576,7 @@ half_tree_fun <- function(term, map_to, plot_save = F, plot_save_path=getwd()){
     assign(i, gray_arrow)
   }
   
-  entry_ls <- c('q1_2_entry', 'q4_entry', 'q9_1_entry','a3_entry', 'a1a_entry', 'a1b_entry', 'a1c_entry', 'a1d_entry')
+  entry_ls <- c('q1_2_entry', 'q4_entry', 'q9_1_entry','a3_entry', 'a1a_entry', 'a1b_entry', 'a1c_entry', 'a1d_entry', 'q14_1_entry')
   for (i in entry_ls) {
     assign(i, "")
   }
@@ -609,10 +609,25 @@ half_tree_fun <- function(term, map_to, plot_save = F, plot_save_path=getwd()){
           q12_y <- red_arrow
           q12_n <- black_arrow
           if (!is.na(temp$Q13_cont_vocab_critical_0_1)) {
-            if (temp$Q13_cont_vocab_critical_0_1 == 1) {
+            if (temp$Q13_cont_vocab_critical_0_1 == 1) { # Q13 = yes
               q13_y <- red_arrow
               q13_n <- black_arrow
-            } else if (temp$Q13_cont_vocab_critical_0_1 == 0) {
+              if (temp$Q14_vocab_ls_source_0_1 == 1) {
+                q14_y <- red_arrow
+                q14_n <- black_arrow
+                q14_1_entry <- temp$Q14_1_which_vocab_ls
+                if (temp$Q15_vocab_ls_source_mod_0_1 == 1) {
+                  q15_y <- red_arrow
+                  q15_n <- black_arrow
+                } else if (temp$Q15_vocab_ls_source_mod_0_1 == 0) {
+                  q15_y <- black_arrow
+                  q15_n <- red_arrow
+                }
+              } else if (temp$Q14_vocab_ls_source_0_1 == 0) {
+                q14_y <- black_arrow
+                q14_n <- red_arrow
+              }
+            } else if (temp$Q13_cont_vocab_critical_0_1 == 0) { # Q13 = no
               q13_y <- black_arrow
               q13_n <- red_arrow
             }
@@ -988,7 +1003,7 @@ half_tree_fun <- function(term, map_to, plot_save = F, plot_save_path=getwd()){
   Q11_keepTerm [label = 'Q11.Propose the FAIRe {term} term\\nin the draft {map_to} eDNA extension?', fontcolor ='red', fillcolor = '#D3D3D3', style = 'filled']
   Q12_contVocab [label ='Q12.Is it controlled vocabulary?', fillcolor = '#D3D3D3', style ='filled']
   Q13_isCritical [label = 'Q13.Is it critical to define the term\\nas a controlled vocabulary?\\n(i.e., to enhance machine readability)', fontcolor='red', fillcolor = '#D3D3D3', style = 'filled']
-  Q14_vocabListSource2 [label = 'Q14.Was the FAIRe vocabulary list sourced from somewhere\\n(e.g., Ontobee, ENVO, MIxS enumerations)?', fillcolor = '#D3D3D3', style = 'filled']
+  Q14_vocabListSource2 [label = 'Q14.Was the FAIRe vocabulary list sourced from somewhere\\n(e.g., Ontobee, ENVO, MIxS enumerations)?\\nQ14.1. Which list? {q14_1_entry}', fillcolor = '#D3D3D3', style = 'filled']
   Q15_vocabListSourceMod2 [label = 'Q15.Was the existing vocablary list modified (i.e., extended)?', fillcolor = '#D3D3D3', style = 'filled']
   
   P5 [label = 'P5.EXCLUDE the FAIRe {term} term\\nfrom the draft {map_to} eDNA checklist.']
@@ -1063,6 +1078,7 @@ half_tree_fun <- function(term, map_to, plot_save = F, plot_save_path=getwd()){
     }
   }
 }
+
 
 
 
