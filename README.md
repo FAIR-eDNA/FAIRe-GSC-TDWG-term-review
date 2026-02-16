@@ -11,10 +11,18 @@ To help visualise the decision-making process, an R function was developed to ge
 
 # General procedure for each FAIRe term
 1. Create a GitHub issue for the term e.g., [Review: RecordedBy #245](https://github.com/FAIR-eDNA/FAIRe-GSC-TDWG-term-review/issues/245). <i>Note that in the modeling standard we are using, [LinkML](https://linkml.io/), 'terms' are referred to as 'slots'.</i>. (Steve - Done)
-2. Raise disucssion points for the term (Miwa)
-3. Add comments and feedback (all TG members) 
+2. Raise disucssion points for the term (e.g., Miwa to generate the decision making tree for each term)
+3. Add comments and feedback (TG members) 
 4. Discuss and vote durign a meeting (e.g., whether to propose the term to GSC/TDWG)
 7. Review SKOS mapping (Re-visit points raised in [Issue #14](https://github.com/FAIR-eDNA/FAIRe_checklist/issues/14))
 8. Update issue status from "Review started" to "Review complete"
 
-
+# General points to condiser for each term 
+1. **Scope and inclusion**
+In general, terms in the FAIRe checklist are there because they are identified as important/useful by the FAIRe WG. So  all FAIRe terms should be proposed to MIxS and DwC-DP <i>except</i> for those that fall out of the GSC/TDWG scope. For example, a) targeted-assay detection protocols without sequencing data for GSC, b) Unit terms for numeric variables (as GSC has their conventions for represneting unites)
+2. **Modifications to existing MIxS/DwC terms**
+Consider whether modifications made in the FAIRe checklists should be proposed. Note that checklist-specific examples may be accepted, but not descriptions (for now) by GSC.
+3. **Controlled vocabularies and ontologies**
+Where possible, terms should be controlled using existing ontologies. Note that some of the current FAIRe controlled terms may not yet aligned with established ontologies, hence require review.  
+4. **Future FAIRev2 development**
+(Probably once we complete above discussions and decisions for all exisitng FAIRe terms,) consider whether additional new terms should be proposed, both for FAIRe v2 and for the MIxS/DwC proposals.
