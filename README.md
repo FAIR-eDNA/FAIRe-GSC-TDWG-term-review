@@ -18,11 +18,7 @@ To help visualise the decision-making process, an R function was developed to ge
 8. Update issue status from "Review started" to "Review complete"
 
 # General points to condiser for each term 
-1. **Scope and inclusion**
-In general, terms in the FAIRe checklist are there because they are identified as important/useful by the FAIRe WG. So  all FAIRe terms should be proposed to MIxS and DwC-DP <i>except</i> for those that fall out of the GSC/TDWG scope. For example, a) targeted-assay detection protocols without sequencing data for GSC, b) Unit terms for numeric variables (as GSC has their conventions for represneting unites)
-2. **Modifications to existing MIxS/DwC terms**
-Consider whether modifications made in the FAIRe checklists should be proposed. Note that checklist-specific examples may be accepted, but not descriptions (for now) by GSC.
-3. **Controlled vocabularies and ontologies**
-Where possible, terms should be controlled using existing ontologies. Note that some of the current FAIRe controlled terms may not yet aligned with established ontologies, hence require review.  
-4. **Future FAIRev2 development**
-(Probably once we complete above discussions and decisions for all exisitng FAIRe terms,) consider whether additional new terms should be proposed, both for FAIRe v2 and for the MIxS/DwC proposals.
+1. **Scope and inclusion :** In general, terms in the FAIRe checklist are there because they are identified as important/useful by the FAIRe WG. So  all FAIRe terms should be proposed to MIxS and DwC-DP <i>except</i> for those that fall out of the GSC/TDWG scope. For example, a) targeted-assay detection protocols without sequencing data for GSC, b) Unit terms for numeric variables (as GSC has their conventions for represneting unites)
+2. **Modifications to existing MIxS/DwC terms :** Consider whether modifications made in the FAIRe checklists should be proposed. Note that checklist-specific examples may be accepted, but not descriptions (for now) by GSC.
+3. **Controlled vocabularies and ontologies :** Where possible, terms should be controlled using existing ontologies. Note that some of the current FAIRe controlled terms may not yet aligned with established ontologies, hence require review.  
+4. **Future FAIRev2 development :** (Probably once we complete above discussions and decisions for all exisitng FAIRe terms,) consider whether additional new terms should be proposed, both for FAIRe v2 and for the MIxS/DwC proposals.
