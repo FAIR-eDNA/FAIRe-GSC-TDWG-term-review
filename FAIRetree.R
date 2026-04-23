@@ -397,13 +397,13 @@ tree_fun <- function(term, map_to, plot_save = F, plot_save_path = getwd()){
   
   P1 [label = 'P1.INCLUDE the {map_to} {object_label} term (without the\\nmodification) in the draft {map_to} eDNA checklist.', style ='']
   P2 [label = 'P2.INCLUDE the {map_to} {object_label} term (WITH or WITHOUT the\\nmodification, depending on the outcome above)\\nin the draft {map_to} eDNA checklist.']
-  P3 [label = 'P3.INCLUDE the {map_to} {object_label} term (as-is) in the\\ndraft {map_to} eDNA checklist.', style ='']
-  P4 [label = 'P4.INCLUDE the {map_to} {object_label} term (as-is) in the\\ndraft {map_to} eDNA checklist.', style ='']
+  P3 [label = 'P3.INCLUDE the {map_to} {object_label} term in the\\ndraft {map_to} eDNA checklist.', style ='']
+  P4 [label = 'P4.INCLUDE the {map_to} {object_label} term in the\\ndraft {map_to} eDNA checklist.', style ='']
   P5 [label = 'P5.EXCLUDE the FAIRe {term} term\\nfrom the draft {map_to} eDNA checklist.']
-  P6 [label = 'P6.PROPOSE the FAIRe {term} term (as-is) in the {map_to} eDNA checklist.']
+  P6 [label = 'P6.PROPOSE the FAIRe {term} term in the {map_to} eDNA checklist.']
   P7 [label = 'P7.PROPOSE the FAIRe {term} term as a non-controlled vocabulary\\nterm in the draft {map_to} eDNA checklist.']
-  P8 [label = 'P8.PROPOSE the FAIRe {term} term (as-is, as a controlled vocabulary)\\nin the draft {map_to} eDNA checklist']
-  P9 [label = 'P9.PROPOSE the FAIRe {term} term (as-is, as a controlled\\nvocabulary) in the {map_to} eDNA checklist.']
+  P8 [label = 'P8.PROPOSE the FAIRe {term} term (as a controlled vocabulary)\\nin the draft {map_to} eDNA checklist']
+  P9 [label = 'P9.PROPOSE the FAIRe {term} term (as a controlled\\nvocabulary) in the {map_to} eDNA checklist.']
   
   A1a_whyMod_name [label= 'A1-a.Describe the reason\\nfor the modification.\\n{a1a_entry}', fillcolor = '#FFF59D', style = 'filled']
   A1b_whyMod_description [label= 'A1-b.Describe the reason\\nfor the modification.\\n{a1b_entry}', fillcolor = '#FFF59D', style = 'filled']
@@ -893,8 +893,8 @@ half_tree_fun <- function(term, map_to, plot_save = F, plot_save_path=getwd()){
   
   P1 [label = 'P1.INCLUDE the {map_to} {object_label} term (without the\\nmodification) in the draft {map_to} eDNA checklist.', style ='']
   P2 [label = 'P2.INCLUDE the {map_to} {object_label} term (WITH or WITHOUT the\\nmodification, depending on the outcome above)\\nin the draft {map_to} eDNA checklist.']
-  P3 [label = 'P3.INCLUDE the {map_to} {object_label} term (as-is) in the\\ndraft {map_to} eDNA checklist.', style ='']
-  P4 [label = 'P4.INCLUDE the {map_to} {object_label} term (as-is) in the\\ndraft {map_to} eDNA checklist.', style ='']
+  P3 [label = 'P3.INCLUDE the {map_to} {object_label} term in the\\ndraft {map_to} eDNA checklist.', style ='']
+  P4 [label = 'P4.INCLUDE the {map_to} {object_label} term in the\\ndraft {map_to} eDNA checklist.', style ='']
   
   A1a_whyMod_name [label= 'A1-a.Describe the reason\\nfor the modification.\\n{a1a_entry}', fillcolor = '#FFF59D', style = 'filled']
   A1b_whyMod_description [label= 'A1-b.Describe the reason\\nfor the modification.\\n{a1b_entry}', fillcolor = '#FFF59D', style = 'filled']
@@ -1007,10 +1007,10 @@ half_tree_fun <- function(term, map_to, plot_save = F, plot_save_path=getwd()){
   Q15_vocabListSourceMod2 [label = 'Q15.Was the existing vocablary list modified (i.e., extended)?', fillcolor = '#D3D3D3', style = 'filled']
   
   P5 [label = 'P5.EXCLUDE the FAIRe {term} term\\nfrom the draft {map_to} eDNA checklist.']
-  P6 [label = 'P6.PROPOSE the FAIRe {term} term (as-is) in the {map_to} eDNA checklist.']
+  P6 [label = 'P6.PROPOSE the FAIRe {term} term in the {map_to} eDNA checklist.']
   P7 [label = 'P7.PROPOSE the FAIRe {term} term as a non-controlled vocabulary\\nterm in the draft {map_to} eDNA checklist.']
-  P8 [label = 'P8.PROPOSE the FAIRe {term} term (as-is, as a controlled vocabulary)\\nin the draft {map_to} eDNA checklist']
-  P9 [label = 'P9.PROPOSE the FAIRe {term} term (as-is, as a controlled\\nvocabulary) in the {map_to} eDNA checklist.']
+  P8 [label = 'P8.PROPOSE the FAIRe {term} term (as a controlled vocabulary)\\nin the draft {map_to} eDNA checklist']
+  P9 [label = 'P9.PROPOSE the FAIRe {term} term (as a controlled\\nvocabulary) in the {map_to} eDNA checklist.']
   
   A3 [label = 'A3.Describe the reason why the term was needed in\\nFAIRe but not in the draft {map_to} eDNA checklist.\\n{a3_entry}', fillcolor = '#FFF59D', style = 'filled']
   
